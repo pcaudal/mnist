@@ -16,15 +16,18 @@ def visu_img_no_predict(X_test,y_test,test_pred):
     
     for i in np.random.choice(np.arange(0, len(y_test)), size=6):
         img_nb += 1
+#        X_test_temp = np.asmatrix(X_test, float)
+#        img = X_test_temp[i,:] 
         img = X_test[i,:] 
         img = img.reshape(28,28)
          
         plt.subplot(2,3,img_nb)
         plt.axis('off')
         plt.imshow(img,cmap = cm.binary)
+#        plt.imshow(img,cmap = "grey")
         plt.title('Prediction: %i' % test_pred[i])
      
-        plt.show()
+    plt.show()
 
 
 def report_conf_mat(y, pred, limite):
