@@ -8,7 +8,7 @@ import pandas as pd
 import numpy as np
 
 ###### import pour affichage des résultats
-from report_result import visu_img_no_predict, report_conf_mat
+from report_result import visu_img_predict, report_conf_mat
 ###################################################################
 
 ###### import pour la méthode SVM
@@ -48,7 +48,7 @@ test_pred = train_model.predict(X_test)
 print("Précision de la prédiction: %.2f%  % " %(accuracy_score(y_test, test_pred)*100) )
 print(classification_report(y_test, test_pred))
  
-visu_img_no_predict(X_test,y_test,test_pred)
+visu_img_predict(X_test,y_test,test_pred)
 
 report_conf_mat(y_test, test_pred, limite = 36)
 

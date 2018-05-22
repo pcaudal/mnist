@@ -7,7 +7,7 @@ import pandas as pd
 import numpy as np
 
 ###### import pour affichage des résultats
-from report_result import visu_img_no_predict, report_conf_mat
+from report_result import visu_img_non_predict, report_conf_mat
 ###################################################################
 
 from keras.models import Sequential
@@ -25,10 +25,10 @@ from sklearn.metrics import classification_report, accuracy_score
 ###################################################################
 ###### chargement des data frame train et test à partir des csv
 
-X_test = pd.read_csv('.//data//X_test.csv', header=None)
-X_train = pd.read_csv('.//data//X_train.csv', header=None)
-y_test = pd.read_csv('.//data//y_test.csv', header=None)
-y_train = pd.read_csv('.//data//y_train.csv', header=None)
+X_test = pd.read_csv('./data/X_test.csv', header=None)
+X_train = pd.read_csv('./data/X_train.csv', header=None)
+y_test = pd.read_csv('./data/y_test.csv', header=None)
+y_train = pd.read_csv('./data/y_train.csv', header=None)
 
 X_train = np.asarray(X_train)
 X_test = np.asarray(X_test)
@@ -38,7 +38,6 @@ X_test = np.asarray(X_test)
 ##### redimensionnée au format (1,28,28).
 X_train = X_train.reshape((X_train.shape[0], 1, 28, 28))
 X_test = X_test.reshape((X_test.shape[0], 1, 28, 28))
-
 
 ##### Normalisation normaliser les pixels (de 0 à 255)
 ##### des données X_train et X_test afin qu'ils soient compris entre 0 et 1
@@ -54,7 +53,7 @@ y_test = np_utils.to_categorical(y_test)
 
 
 
-###### DNN méthode
+###### DNN architecture LeNet méthode
 
 num_pixels = X_train.shape[1]
 num_classes = y_test.shape[1]
@@ -150,7 +149,7 @@ y = y_test.argmax(axis=1)
 print("Précision de la prédiction: %.2f%  % " %(accuracy_score(y, pred)*100) )
 print(classification_report(y,pred))
  
-visu_img_no_predict(X_test,y,pred)
+visu_img_non_predict(X_test,y,pred)
 
 report_conf_mat(y, pred, limite = 10)
 

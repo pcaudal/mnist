@@ -8,7 +8,7 @@ import pandas as pd
 import numpy as np
 
 ###### import pour affichage des résultats
-from report_result import visu_img_no_predict, report_conf_mat
+from report_result import visu_img_non_predict, report_conf_mat
 ###################################################################
 
 from keras.models import Sequential
@@ -26,10 +26,10 @@ from sklearn.metrics import classification_report, accuracy_score
 ###################################################################
 ###### chargement des data frame train et test à partir des csv
 
-X_test = pd.read_csv('.//data//X_test.csv', header=None)
-X_train = pd.read_csv('.//data//X_train.csv', header=None)
-y_test = pd.read_csv('.//data//y_test.csv', header=None)
-y_train = pd.read_csv('.//data//y_train.csv', header=None)
+X_test = pd.read_csv('./data/X_test.csv', header=None)
+X_train = pd.read_csv('./data/X_train.csv', header=None)
+y_test = pd.read_csv('./data/y_test.csv', header=None)
+y_train = pd.read_csv('./data/y_train.csv', header=None)
 
 X_train = np.asarray(X_train)
 X_test = np.asarray(X_test)
@@ -130,8 +130,8 @@ y = y_test.argmax(axis=1)
 ###### affichage des résultats
 print("Précision de la prédiction: %.2f%  % " %(accuracy_score(y, pred)*100) )
 print(classification_report(y,pred))
- 
-visu_img_no_predict(X_test,y,pred)
 
+visu_img_non_predict(X_test,y,pred)
+ 
 report_conf_mat(y, pred, limite = 10)
 

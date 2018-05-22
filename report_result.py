@@ -10,14 +10,12 @@ import itertools
 from sklearn.metrics import confusion_matrix
 
 
-def visu_img_no_predict(X_test,y_test,test_pred):
+def visu_img_predict(X_test,y_test,test_pred):
     
     img_nb=0
     
     for i in np.random.choice(np.arange(0, len(y_test)), size=6):
         img_nb += 1
-#        X_test_temp = np.asmatrix(X_test, float)
-#        img = X_test_temp[i,:] 
         img = X_test[i,:] 
         img = img.reshape(28,28)
          
@@ -26,8 +24,20 @@ def visu_img_no_predict(X_test,y_test,test_pred):
         plt.imshow(img,cmap = cm.binary)
 #        plt.imshow(img,cmap = "grey")
         plt.title('Prediction: %i' % test_pred[i])
-     
-    plt.show()
+
+def visu_img_non_predict(X_test,y_test,test_pred):
+
+    img_nb=0
+    
+    for i in np.random.choice(np.where(y_test!=test_pred)[0], size=6) :
+        img_nb += 1
+        img = X_test[i,:] 
+        img = img.reshape(28,28)
+        
+        plt.subplot(2,3,img_nb)
+        plt.axis('off')
+        plt.imshow(img,cmap = cm.binary)
+        plt.title('Prediction: %i' % test_pred[i])
 
 
 def report_conf_mat(y, pred, limite):
