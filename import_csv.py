@@ -24,10 +24,10 @@ import itertools
 
 ###### chargement des data frame train et test à partir des csv
 
-X_test = pd.read_csv('.//data//X_test.csv', header=None)
-X_train = pd.read_csv('.//data//X_train.csv', header=None)
-y_test = pd.read_csv('.//data//y_test.csv', header=None)
-y_train = pd.read_csv('.//data//y_train.csv', header=None)
+X_test = pd.read_csv('./data/X_test.csv', header=None)
+X_train = pd.read_csv('./data/X_train.csv', header=None)
+y_test = pd.read_csv('./data/y_test.csv', header=None)
+y_train = pd.read_csv('./data/y_train.csv', header=None)
 
 
 X_train = np.asarray(X_train)

@@ -51,13 +51,15 @@ import itertools
 
 ###### Préparation des data frame train et test enregistré dans des csv
 
-df = pd.read_csv('.//data//mnist_complet.csv', header=None)
+df = pd.read_csv('./data/mnist_complet.csv', header=None)
 
 (X_train, X_test, y_train, y_test) = train_test_split(df.iloc[:,1:], df.iloc[:,0], test_size = 0.33, random_state = 56)
 
-pd.DataFrame(X_test).to_csv('.//data//X_test.csv', sep = ',', index=False)
-pd.DataFrame(X_train).to_csv('.//data//X_train.csv', sep = ',', index=False)
-pd.DataFrame(y_test).to_csv('.//data//y_test.csv', sep = ',', index=False)
-pd.DataFrame(y_train).to_csv('.//data//y_train.csv', sep = ',', index=False)
+pd.DataFrame(X_test).to_csv('./data/X_test.csv', sep = ',', index=False)
+pd.DataFrame(X_train).to_csv('./data/X_train.csv', sep = ',', index=False)
+pd.DataFrame(y_test).to_csv('./data/y_test.csv', sep = ',', index=False)
+pd.DataFrame(y_train).to_csv('./data/y_train.csv', sep = ',', index=False)
 
 ###################################################################
+
+
