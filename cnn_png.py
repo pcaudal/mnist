@@ -21,7 +21,7 @@ from keras.layers.convolutional import MaxPooling2D
 from keras.utils import np_utils 
 
 from sklearn.metrics import classification_report, accuracy_score
-import tensorflow as tf
+from report_result import visu_img_predict, report_conf_mat
 
 def create_batches(batch_size, path):
 
@@ -35,7 +35,7 @@ def create_batches(batch_size, path):
 
     print("2 step")
     ar_images = []
-    for i in ar_labels:
+    for i in range(nb_row):
         ar_images.append(mpimg.imread(path+str(i)+'.png'))
     ar_images = np.asarray(ar_images)
 
@@ -48,11 +48,13 @@ def create_batches(batch_size, path):
 
 
 #link to to images et labels repository (googledrive)
-path_train = "~/google-drive/data_scientist/mnist_data/train"
-path_test = "~/google-drive/data_scientist/mnist_data/test"
+path_train = "/home/tostakit/google-drive/data_scientist/mnist_data/train/"
+path_test = "/home/tostakit/google-drive/data_scientist/mnist_data/test/"
+
+offset_id_img_test = 800
 # Number of Classes and Epochs of Training
 nb_epoch = 10
-batch_size = 2
+batch_size = 128
 number_of_epochs = 10
 # Input Image Dimensions
 img_rows, img_cols = 28, 28
@@ -85,12 +87,30 @@ model.compile(optimizer = 'adam',
 batch_generator = create_batches(batch_size, path_train)
 for images, labels in batch_generator:
     # One hot conversion
-    labels = np_utils.to_categorical(labels, 10)
-#    labels = np_utils.to_categorical(labels)
+#    labels = np_utils.to_categorical(labels, 10)
+    labels = np_utils.to_categorical(labels)
     # Image normalisation for a better training model efficaciency
     images = images/255
     model.train_on_batch(images, labels)
-    
+
+test_pred = []    
+for i in range(0,200):
+    image = mpimg.imread(path_test+str(i+offset_id_img_test)+'.png')
+    test_pred.append(model.predict(image))    
+
+#visu_img_predict(X_test,y_test,test_pred)
+#report_conf_mat(y_test, test_pred, limite = 36)
+
+
+# 
+# batch_generator = create_batches(batch_size, path_test)
+# for images, labels in batch_generator:
+#     # One hot conversion
+# #    labels = np_utils.to_categorical(labels, 10)
+#     labels = np_utils.to_categorical(labels)
+#     # Image normalisation for a better training model efficaciency
+#     images = images/255
+#     model.train_on_batch(images, labels)
 
 # test_pred = model.predict(X_test)
 # score = model.evaluate(X_test, y_test)
