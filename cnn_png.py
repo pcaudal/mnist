@@ -27,7 +27,7 @@ def create_batches(batch_size, path):
 
     print("1 step")
     ar_labels = []
-    df_labels = pd.read_csv(path+'labels/png_labels.csv', header=None)
+    df_labels = pd.read_csv(path+'png_labels.csv', header=None)
     nb_row = len(df_labels)
     for i in range(nb_row):
         ar_labels.append(df_labels[0][i])
@@ -36,7 +36,7 @@ def create_batches(batch_size, path):
     print("2 step")
     ar_images = []
     for i in ar_labels:
-        ar_images.append(mpimg.imread(path+'pics/'+str(i)+'.png'))
+        ar_images.append(mpimg.imread(path+str(i)+'.png'))
     ar_images = np.asarray(ar_images)
 
     print("3 step")
@@ -48,8 +48,8 @@ def create_batches(batch_size, path):
 
 
 #link to to images et labels repository (googledrive)
-#path = "~/google-drive/data_scientist/mnist_data/"
-path = "/media/tostakit/Partage/google-drive/data_scientist/mnist_data/"
+path_train = "~/google-drive/data_scientist/mnist_data/train"
+path_test = "~/google-drive/data_scientist/mnist_data/test"
 # Number of Classes and Epochs of Training
 nb_epoch = 10
 batch_size = 2
@@ -82,7 +82,7 @@ model.compile(optimizer = 'adam',
                loss = 'categorical_crossentropy',
                metrics = ['accuracy'])
 
-batch_generator = create_batches(batch_size, path)
+batch_generator = create_batches(batch_size, path_train)
 for images, labels in batch_generator:
     # One hot conversion
     labels = np_utils.to_categorical(labels, 10)
